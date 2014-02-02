@@ -1,0 +1,42 @@
+public boolean onSceneTouchEvent(Scene pScene, TouchEvent pSceneTouchEvent) {
+		
+	// TODO Auto-generated method stub 
+
+
+	float touchX = pSceneTouchEvent.getX();
+
+	float touchY = pSceneTouchEvent.getY(); 
+
+
+	float x_length = touchX - player.getX();//b_touchX is x point for the center of sprite
+
+	float y_length = touchY - player.getY();//b_touchY is y point for the center of sprite 
+
+
+	if(pSceneTouchEvent.isActionMove()){
+
+	light.setRotation(MathUtils.radToDeg((float)Math.atan2(y_length, x_length)));
+
+
+	return true;
+
+	} 
+
+	return false;
+
+	}
+
+
+public class LucalActivity_v2 extends BaseGameActivity implements IOnSceneTouchListener {
+
+import org.anddev.andengine.entity.scene.Scene.IOnSceneTouchListener;
+
+import org.anddev.andengine.input.touch.TouchEvent;
+
+@Override
+	public Scene onLoadScene() {
+		Scene toReturn = createGameScene();
+		camera.setCenter(player.getX(), player.getY());
+		toReturn.setOnSceneTouchListener(this);
+		return toReturn;
+	}
